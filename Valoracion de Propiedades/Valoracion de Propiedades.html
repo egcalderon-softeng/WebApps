@@ -1,0 +1,368 @@
+<html>
+<head>
+	<title>Valoracion de Propiedades</title>
+	<script src="calculos.js"></script>
+</head>
+
+<body style="
+		background-image:url(fondoValoracion.jpg);
+		background-repeat:no-repeat;
+		background-size:cover;">
+<div align="center">
+	<h1>Ponderacion de Viviendas<h1>
+	<table border="1|0">
+		<tr>
+			<td>Nombre de la Vivienda</button></td>
+			<td><textarea name="Nombre" rows="1" style="width:100%">Casa 1</textarea></td>
+		</tr>
+		<tr>
+			<td>Link de la Vivienda</button></td>
+			<td><textarea name="Link" rows="1" style="width:100%"></textarea></td>
+		</tr>
+		<tr>
+			<td>Expensas</td>
+			<td><textarea name="Expensas" rows="1" maxlength="4" align="right" onKeyUp="calcularAtributoFuncionLineal('Expensas',-0.1,100,0.0567)">1000</textarea>$</td>
+		</tr>
+		<tr>
+			<td>ABL</td>
+			<td><textarea name="ABL" rows="1" maxlength="6" align="right" onKeyUp="calcularAtributoFuncionLineal('ABL',-0.5,150,0.0525)">300</textarea>$</td>
+		</tr>
+		<tr>
+			<td>Alquiler</td>
+			<td><textarea name="Alquiler" rows="1" maxlength="7" align="right" onKeyUp="calcularAtributoFuncionLineal('Alquiler',-0.05,200,0.0903)">4000</textarea>$</td>
+		</tr>
+		<tr>
+			<td>Garantia</td>
+			<td><textarea name="Garantia" rows="1" maxlength="7" align="right" onKeyUp="calcularAtributoFuncionLineal('Garantia',-0.0125,150,0.0105)">12000</textarea>$</td>
+		</tr>
+		<tr>
+			<td>A linea B</td>
+			<td><textarea name="A_linea_B" rows="1" maxlength="2" align="right" onKeyUp="calcularAtributoFuncionLineal('A_linea_B',-10,100,0.08)">10</textarea>Cuadras</td>
+		</tr>
+		<tr>
+			<td>A linea D</td>
+			<td><textarea name="A_linea_D" rows="1" maxlength="2" align="right" onKeyUp="calcularAtributoFuncionLineal('A_linea_D',-10,100,0.07)">10</textarea>Cuadras</td>
+		</tr>
+		<tr>
+			<td>A tren Mitre</td>
+			<td><textarea name="A_tren_Mitre" rows="1" maxlength="2" align="right" onKeyUp="calcularAtributoFuncionLineal('A_tren_Mitre',-10,100,0.006)">10</textarea>Cuadras</td>
+		</tr>
+		<tr>
+			<td>A tren Urquiza</td>
+			<td><textarea name="A_tren_Urquiza" rows="1" maxlength="2" align="right" onKeyUp="calcularAtributoFuncionLineal('A_tren_Urquiza',-10,100,0.022)">10</textarea>Cuadras</td>
+		</tr>
+		<tr>
+			<td>A tren San Martin</td>
+			<td><textarea name="A_tren_San_Martin" rows="1" maxlength="2" align="right" onKeyUp="calcularAtributoFuncionLineal('A_tren_San_Martin',-10,100,0.022)">10</textarea>Cuadras</td>
+		</tr>
+		<tr>
+			<td>Distribucion y Tamaño</td>
+			<td>
+				<table border="1|0" style="width:100%">
+					<tr>
+						<td>
+							<textarea name="Tamanio" rows="1" maxlength="4" align="right" onKeyUp="calcularAtributoFuncionLineal('Tamanio',3.34,-67,0.7);calcularAtributoDistribucionYTamanio();">0</textarea>M<sup>2</sup>
+						</td>
+					</tr>
+					<tr>
+						<td>Distribucion:
+							<input type="radio" valor="Buena" name="Distribucion" value="100" onClick="calcularAtributoValoresDiscretos('Distribucion',0.3);calcularAtributoDistribucionYTamanio();">Buena
+							<input type="radio" valor="Mala" name="Distribucion" value="0" checked="checked" onClick="calcularAtributoValoresDiscretos('Distribucion',0.3);calcularAtributoDistribucionYTamanio();">Mala
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td>Ascensor</td>
+			<td>
+				<input type="radio" valor="Si" name="Ascensor" value="100" onClick="calcularAtributoValoresDiscretos('Ascensor',0.019)">Si
+				<input type="radio" valor="No" name="Ascensor" value="0" checked="checked" onClick="calcularAtributoValoresDiscretos('Ascensor',0.019)">No
+			</td>
+		</tr>
+		<tr>
+			<td>Instalacion de Agua</td>
+			<td>
+				<table border="1|0" style="width:100%">
+					<tr>
+						<td>Antiguedad:
+							<input type="radio" valor="> 15" name="Antiguedad_Agua" value="0" checked="checked" onClick="calcularAtributoValoresDiscretos('Antiguedad_Agua',0.34);calcularAtributoInstalacionDeAgua();">> 15
+							<input type="radio" valor="< 15" name="Antiguedad_Agua" value="100" onClick="calcularAtributoValoresDiscretos('Antiguedad_Agua',0.34);calcularAtributoInstalacionDeAgua();">< 15
+						</td>
+					</tr>
+					<tr>
+						<td>Materiales:
+							<input type="radio" valor="Hidrobronce/Plastico" name="Materiales_Agua" value="100" onClick="calcularAtributoValoresDiscretos('Materiales_Agua',0.33);calcularAtributoInstalacionDeAgua();">Hidrobronce/Plastico
+							<input type="radio" valor="Plomo" name="Materiales_Agua" value="0" checked="checked" onClick="calcularAtributoValoresDiscretos('Materiales_Agua',0.33);calcularAtributoInstalacionDeAgua();">Plomo
+						</td>
+					</tr>
+					<tr>
+						<td>Humedad:
+							<input type="radio" valor="Poca" name="Humedad_Agua" value="100" onClick="calcularAtributoValoresDiscretos('Humedad_Agua',0.33);calcularAtributoInstalacionDeAgua();">Poca
+							<input type="radio" valor="Mucha" name="Humedad_Agua" value="0" checked="checked" onClick="calcularAtributoValoresDiscretos('Humedad_Agua',0.33);calcularAtributoInstalacionDeAgua();">Mucha
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td>Instalacion de Gas</td>
+			<td>
+				<table border="1|0" style="width:100%">
+					<tr>
+						<td>Antiguedad:
+							<input type="radio" valor="> 15" name="Antiguedad_Gas" value="0" checked="checked" onClick="calcularAtributoValoresDiscretos('Antiguedad_Gas',0.5);calcularAtributoInstalacionDeGas();">> 15
+							<input type="radio" valor="< 15" name="Antiguedad_Gas" value="100" onClick="calcularAtributoValoresDiscretos('Antiguedad_Gas',0.5);calcularAtributoInstalacionDeGas();">< 15
+						</td>
+					</tr>
+					<tr>
+						<td>Aprobacion:
+							<input type="radio" valor="Si" name="Aprobacion_Gas" value="100" onClick="calcularAtributoValoresDiscretos('Aprobacion_Gas',0.5);calcularAtributoInstalacionDeGas();">Si
+							<input type="radio" valor="No" name="Aprobacion_Gas" value="0" checked="checked" onClick="calcularAtributoValoresDiscretos('Aprobacion_Gas',0.5);calcularAtributoInstalacionDeGas();">No
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td>Instalacion de Luz</td>
+			<td>
+				<table border="1|0" style="width:100%">
+					<tr>
+						<td>Antiguedad:
+							<input type="radio" valor="> 10" name="Antiguedad_Luz" value="0" checked="checked" onClick="calcularAtributoValoresDiscretos('Antiguedad_Luz',0.34);calcularAtributoInstalacionDeLuz();">> 10
+							<input type="radio" valor="< 10" name="Antiguedad_Luz" value="100" onClick="calcularAtributoValoresDiscretos('Antiguedad_Luz',0.34);calcularAtributoInstalacionDeLuz();">< 10
+						</td>
+					</tr>
+					<tr>
+						<td>Llave Termica:
+							<input type="radio" valor="Si" name="Llave_Termica_Luz" value="100" onClick="calcularAtributoValoresDiscretos('Llave_Termica_Luz',0.33);calcularAtributoInstalacionDeLuz();">Si
+							<input type="radio" valor="No" name="Llave_Termica_Luz" value="0" checked="checked" onClick="calcularAtributoValoresDiscretos('Llave_Termica_Luz',0.33);calcularAtributoInstalacionDeLuz();">No
+						</td>
+					</tr>
+					<tr>
+						<td>Descarga a Tierra:
+							<input type="radio" valor="Si" name="Descarga_A_Tierra_Luz" value="100" onClick="calcularAtributoValoresDiscretos('Descarga_A_Tierra_Luz',0.33);calcularAtributoInstalacionDeLuz();">Si
+							<input type="radio" valor="No" name="Descarga_A_Tierra_Luz" value="0" checked="checked" onClick="calcularAtributoValoresDiscretos('Descarga_A_Tierra_Luz',0.33);calcularAtributoInstalacionDeLuz();">No
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td>Cocina</td>
+			<td>
+				<input type="radio" valor="Si" name="Cocina" value="100" onClick="calcularAtributoValoresDiscretos('Cocina',0.0152)">Si
+				<input type="radio" valor="No" name="Cocina" value="0" checked="checked" onClick="calcularAtributoValoresDiscretos('Cocina',0.0152)">No
+				
+			</td>
+		</tr>
+		<tr>
+			<td>Baño</td>
+			<td>
+				<input type="radio" valor="Malo" name="Banio" value="0" checked="checked" onClick="calcularAtributoValoresDiscretos('Banio',0.0133)">Malo
+				<input type="radio" valor="Bueno" name="Banio" value="60" onClick="calcularAtributoValoresDiscretos('Banio',0.0133)">Bueno
+				<input type="radio" valor="Muy Bueno" name="Banio" value="85" onClick="calcularAtributoValoresDiscretos('Banio',0.0133)">Muy Bueno
+				<input type="radio" valor="Excelente" name="Banio" value="100" onClick="calcularAtributoValoresDiscretos('Banio',0.0133)">Excelente
+			</td>
+		</tr>
+		<tr>
+			<td>Lavarropas</td>
+			<td>
+				<input type="radio" valor="Si" name="Lavarropas" value="100" onClick="calcularAtributoValoresDiscretos('Lavarropas',0.0133)">Si
+				<input type="radio" valor="No" name="Lavarropas" value="0" checked="checked" onClick="calcularAtributoValoresDiscretos('Lavarropas',0.0133)">No
+			</td>
+		</tr>
+		<tr>
+			<td>Vista</td>
+			<td>
+				<input type="radio" valor="Mala" name="Vista" value="0" checked="checked" onClick="calcularAtributoValoresDiscretos('Vista',0.0114)">Mala
+				<input type="radio" valor="Buena" name="Vista" value="60" onClick="calcularAtributoValoresDiscretos('Vista',0.0114)">Buena
+				<input type="radio" valor="Muy Buena" name="Vista" value="85" onClick="calcularAtributoValoresDiscretos('Vista',0.0114)">Muy Buena
+				<input type="radio" valor="Excelente" name="Vista" value="100" onClick="calcularAtributoValoresDiscretos('Vista',0.0114)">Excelente
+			</td>
+		</tr>
+		<tr>
+			<td>Iluminacion</td>
+			<td>
+				<input type="radio" valor="Mala" name="Iluminacion" value="0" checked="checked" onClick="calcularAtributoValoresDiscretos('Iluminacion',0.0114)">Mala
+				<input type="radio" valor="Buena" name="Iluminacion" value="60" onClick="calcularAtributoValoresDiscretos('Iluminacion',0.0114)">Buena
+				<input type="radio" valor="Muy Buena" name="Iluminacion" value="85" onClick="calcularAtributoValoresDiscretos('Iluminacion',0.0114)">Muy Buena
+				<input type="radio" valor="Excelente" name="Iluminacion" value="100" onClick="calcularAtributoValoresDiscretos('Iluminacion',0.0114)">Excelente
+			</td>
+		</tr>
+		<tr>
+			<td>Pintura</td>
+			<td>
+				<input type="radio" valor="Mala" name="Pintura" value="0" checked="checked" onClick="calcularAtributoValoresDiscretos('Pintura',0.0095)">Mala
+				<input type="radio" valor="Buena" name="Pintura" value="60" onClick="calcularAtributoValoresDiscretos('Pintura',0.0095)">Buena
+				<input type="radio" valor="Muy Buena" name="Pintura" value="85" onClick="calcularAtributoValoresDiscretos('Pintura',0.0095)">Muy Buena
+				<input type="radio" valor="Excelente" name="Pintura" value="100" onClick="calcularAtributoValoresDiscretos('Pintura',0.0095)">Excelente
+			</td>
+		</tr>
+		<tr>
+			<td>Pisos</td>
+			<td>
+				<input type="radio" valor="Malos" name="Pisos" value="0" checked="checked" onClick="calcularAtributoValoresDiscretos('Pisos',0.0076)">Malos
+				<input type="radio" valor="Buenos" name="Pisos" value="60" onClick="calcularAtributoValoresDiscretos('Pisos',0.0076)">Buenos
+				<input type="radio" valor="Muy Buenos" name="Pisos" value="85" onClick="calcularAtributoValoresDiscretos('Pisos',0.0076)">Muy Buenos
+				<input type="radio" valor="Excelentes" name="Pisos" value="100" onClick="calcularAtributoValoresDiscretos('Pisos',0.0076)">Excelentes
+			</td>
+		</tr>
+		<tr>
+			<td>Amoblado</td>
+			<td>
+				<input type="radio" valor="Si" name="Amoblado" value="100" onClick="calcularAtributoValoresDiscretos('Amoblado',0.0076)">Si
+				<input type="radio" valor="No" name="Amoblado" value="0" checked="checked" onClick="calcularAtributoValoresDiscretos('Amoblado',0.0076)">No
+			</td>
+		</tr>
+		<tr>
+			<td>Parrilla</td>
+			<td>
+				<input type="radio" valor="Si" name="Parrilla" value="100" onClick="calcularAtributoValoresDiscretos('Parrilla',0.0038)">Si
+				<input type="radio" valor="No" name="Parrilla" value="0" checked="checked" onClick="calcularAtributoValoresDiscretos('Parrilla',0.0038)">No
+			</td>
+		</tr>
+		<tr>
+			<td>Supermercado</td>
+			<td><textarea name="Supermercado" rows="1" maxlength="2" align="right" onKeyUp="calcularAtributoFuncionLineal('Supermercado',-10,100,0.075)">10</textarea>Cuadras</td>
+		</tr>
+		<tr>
+			<td>Verduleria</td>
+			<td><textarea name="Verduleria" rows="1" maxlength="2" align="right" onKeyUp="calcularAtributoFuncionLineal('Verduleria',-10,100,0.027)">10</textarea>Cuadras</td>
+		</tr>
+		<tr>
+			<td>Carniceria</td>
+			<td><textarea name="Carniceria" rows="1" maxlength="2" align="right" onKeyUp="calcularAtributoFuncionLineal('Carniceria',-10,100,0.003)">10</textarea>Cuadras</td>
+		</tr>
+		<tr>
+			<td>Bancos</td>
+			<td><textarea name="Bancos" rows="1" maxlength="2" align="right" onKeyUp="calcularAtributoFuncionLineal('Bancos',-10,100,0.03)">10</textarea>Cuadras</td>
+		</tr>
+		<tr>
+			<td>Deliverys</td>
+			<td><textarea name="Deliverys" rows="1" maxlength="2" align="right" onKeyUp="calcularAtributoFuncionLineal('Deliverys',-10,100,0.015)">10</textarea>Cuadras</td>
+		</tr>
+		<tr>
+			<td>Seguridad</td>
+			<td>
+				<input type="radio" valor="Mala" name="Seguridad" value="0" checked="checked" onClick="calcularAtributoValoresDiscretos('Seguridad',0.044)">Mala
+				<input type="radio" valor="Buena" name="Seguridad" value="60" onClick="calcularAtributoValoresDiscretos('Seguridad',0.044)">Buena
+				<input type="radio" valor="Muy Buena" name="Seguridad" value="85" onClick="calcularAtributoValoresDiscretos('Seguridad',0.044)">Muy Buena
+				<input type="radio" valor="Excelente" name="Seguridad" value="100" onClick="calcularAtributoValoresDiscretos('Seguridad',0.044)">Excelente
+			</td>
+		</tr>
+		<tr>
+			<td>Espacios Verdes</td>
+			<td><textarea name="Espacios_Verdes" rows="1" maxlength="2" align="right" onKeyUp="calcularAtributoFuncionLineal('Espacios_Verdes',-20,100,0.0264)">20</textarea>Cuadras</td>
+		</tr>
+		<tr>
+			<td>Cortes de luz</td>
+			<td>
+				<input type="radio" valor="Nunca" name="Cortes_de_Luz" value="100" onClick="calcularAtributoValoresDiscretos('Cortes_de_Luz',0.0099)">Nunca
+				<input type="radio" valor="Poco Frecuentes" name="Cortes_de_Luz" value="50" onClick="calcularAtributoValoresDiscretos('Cortes_de_Luz',0.0099)">Poco Frecuentes
+				<input type="radio" valor="Muy Frecuentes" name="Cortes_de_Luz" value="0" checked="checked" onClick="calcularAtributoValoresDiscretos('Cortes_de_Luz',0.0099)">Muy Frecuentes
+			</td>
+		</tr>
+		<tr>
+			<td>Cortes de gas</td>
+			<td>
+				<input type="radio" valor="Nunca" name="Cortes_de_Gas" value="100" onClick="calcularAtributoValoresDiscretos('Cortes_de_Gas',0.0099)">Nunca
+				<input type="radio" valor="Poco Frecuentes" name="Cortes_de_Gas" value="50" onClick="calcularAtributoValoresDiscretos('Cortes_de_Gas',0.0099)">Poco Frecuentes
+				<input type="radio" valor="Muy Frecuentes" name="Cortes_de_Gas" value="0" checked="checked" onClick="calcularAtributoValoresDiscretos('Cortes_de_Gas',0.0099)">Muy Frecuentes
+			</td>
+		</tr>
+		<tr>
+			<td>Cortes de agua</td>
+			<td>
+				<input type="radio" valor="Nunca" name="Cortes_de_Agua" value="100" onClick="calcularAtributoValoresDiscretos('Cortes_de_Agua',0.0099)">Nunca
+				<input type="radio" valor="Poco Frecuentes" name="Cortes_de_Agua" value="50" onClick="calcularAtributoValoresDiscretos('Cortes_de_Agua',0.0099)">Poco Frecuentes
+				<input type="radio" valor="Muy Frecuentes" name="Cortes_de_Agua" value="0" checked="checked" onClick="calcularAtributoValoresDiscretos('Cortes_de_Agua',0.0099)">Muy Frecuentes
+			</td>
+		</tr>
+		<tr>
+			<td>Quilombo</td>
+			<td>
+				<input type="radio" valor="Nunca" name="Quilombo" value="100" onClick="calcularAtributoValoresDiscretos('Quilombo',0.0066)">Nunca
+				<input type="radio" valor="Poco Frecuentes" name="Quilombo" value="50" onClick="calcularAtributoValoresDiscretos('Quilombo',0.0066)">Poco Frecuentes
+				<input type="radio" valor="Muy Frecuentes" name="Quilombo" value="0" checked="checked" onClick="calcularAtributoValoresDiscretos('Quilombo',0.0066)">Muy Frecuentes
+			</td>
+		</tr>
+		<tr>
+			<td>Atractivo visual</td>
+			<td>
+				<input type="radio" valor="Feo" name="Atractivo_Visual" value="0" checked="checked" onClick="calcularAtributoValoresDiscretos('Atractivo_Visual',0.0033)">Feo
+				<input type="radio" valor="Lindo" name="Atractivo_Visual" value="60" onClick="calcularAtributoValoresDiscretos('Atractivo_Visual',0.0033)">Lindo
+				<input type="radio" valor="Muy Lindo" name="Atractivo_Visual" value="85" onClick="calcularAtributoValoresDiscretos('Atractivo_Visual',0.0033)">Muy Lindo
+				<input type="radio" valor="Hermoso" name="Atractivo_Visual" value="100" onClick="calcularAtributoValoresDiscretos('Atractivo_Visual',0.0033)">Hermoso
+			</td>
+		</tr>
+		<tr>
+			<td>Gimnasio</td>
+			<td><textarea name="Gimnasio" rows="1" maxlength="2" align="right" onKeyUp="calcularAtributoFuncionLineal('Gimnasio',-10,100,0.009)">10</textarea>Cuadras</td>
+		</tr>
+		<tr>
+			<td>Ferreteria</td>
+			<td><textarea name="Ferreteria" rows="1" maxlength="2" align="right" onKeyUp="calcularAtributoFuncionLineal('Ferreteria',-10,100,0.013)">10</textarea>Cuadras</td>
+		</tr>
+		<tr>
+			<td>Construccion</td>
+			<td><textarea name="Construccion" rows="1" maxlength="2" align="right" onKeyUp="calcularAtributoFuncionLineal('Construccion',-10,100,0.011)">10</textarea>Cuadras</td>
+		</tr>
+		<tr>
+			<td>Farmacia</td>
+			<td><textarea name="Farmacia" rows="1" maxlength="2" align="right" onKeyUp="calcularAtributoFuncionLineal('Farmacia',-10,100,0.015)">10</textarea>Cuadras</td>
+		</tr>
+		<tr>
+			<td>Hospitales</td>
+			<td><textarea name="Hospitales" rows="1" maxlength="2" align="right" onKeyUp="calcularAtributoFuncionLineal('Hospitales',-10,100,0.02)">10</textarea>Cuadras</td>
+		</tr>
+		<tr>
+			<td>Veterinarias</td>
+			<td><textarea name="Veterinarias" rows="1" maxlength="2" align="right" onKeyUp="calcularAtributoFuncionLineal('Veterinarias',-10,100,0.001)">10</textarea>Cuadras</td>
+		</tr>
+		<tr>
+			<td>Peluquerias</td>
+			<td><textarea name="Peluquerias" rows="1" maxlength="2" align="right" onKeyUp="calcularAtributoFuncionLineal('Peluquerias',-10,100,0.011)">10</textarea>Cuadras</td>
+		</tr>
+		<tr>
+			<td>Libreria</td>
+			<td><textarea name="Libreria" rows="1" maxlength="2" align="right" onKeyUp="calcularAtributoFuncionLineal('Libreria',-10,100,0.007)">10</textarea>Cuadras</td>
+		</tr>
+		<tr>
+			<td>Talleres Mecanicos</td>
+			<td><textarea name="Talleres_Mecanicos" rows="1" maxlength="2" align="right" onKeyUp="calcularAtributoFuncionLineal('Talleres_Mecanicos',-10,100,0.008)">10</textarea>Cuadras</td>
+		</tr>
+		<tr>
+			<td>Bicicleteria</td>
+			<td><textarea name="Bicicleteria" rows="1" maxlength="2" align="right" onKeyUp="calcularAtributoFuncionLineal('Bicicleteria',-10,100,0.005)">10</textarea>Cuadras</td>
+		</tr>
+		<tr>
+			<td>Cines</td>
+			<td><textarea name="Cines" rows="1" maxlength="2" align="right" onKeyUp="calcularAtributoFuncionLineal('Cines',-10,100,0.014)">10</textarea>Cuadras</td>
+		</tr>
+		<tr>
+			<td>Bares</td>
+			<td><textarea name="Bares" rows="1" maxlength="2" align="right" onKeyUp="calcularAtributoFuncionLineal('Bares',-10,100,0.008)">10</textarea>Cuadras</td>
+		</tr>
+		<tr>
+			<td>Teatros</td>
+			<td><textarea name="Teatros" rows="1" maxlength="2" align="right" onKeyUp="calcularAtributoFuncionLineal('Teatros',-10,100,0.004)">10</textarea>Cuadras</td>
+		</tr>
+		<tr>
+			<td>Restaurantes</td>
+			<td><textarea name="Restaurantes" rows="1" maxlength="2" align="right" onKeyUp="calcularAtributoFuncionLineal('Restaurantes',-10,100,0.014)">10</textarea>Cuadras</td>
+		</tr>
+		<tr>
+			<td><button style="width:100%" onclick="calcularTotal()">Calcular</button></td>
+			<td><textarea name="resultado" rows="1" maxlength="8" style="width:100%">0</textarea></td>
+		</tr>
+		<tr>
+			<td colspan="2"><button onclick="guardarResultado()" style="width:100%">Guardar Vivienda file</button></td>
+		</tr>
+	</table>
+	<a id="downloadlink" style="display: none"/>
+</div>
+</body>
+
+</html>
